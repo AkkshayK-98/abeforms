@@ -25,10 +25,10 @@ var loginRoutes = []Route{
 		Handler:      controllers.GetClient,
 		AuthRequired: false,
 	},
-	Route{ // I think this is fixed..... BUT HAVE TO CHECK
+	Route{
 		URI:          "/clientdashboard/api/signup",
 		Method:       http.MethodPost,
-		Handler:      controllers.AddClient, //This actually leads to the function for adding cases.... HAVE TO FIX THIS
+		Handler:      controllers.AddClient,
 		AuthRequired: false,
 	},
 }

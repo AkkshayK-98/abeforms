@@ -32,6 +32,12 @@ var dashboardRoutes = []Route{
 		AuthRequired: true,
 	},
 	Route{
+		URI:          "/lawyerdashboard/api/lawyersendtimemeeting",
+		Method:       http.MethodPost,
+		Handler:      controllers.LawyerSendTimeMeeting,
+		AuthRequired: true,
+	},
+	Route{
 		URI:          "/clientdashboard/api/unassignedcases",
 		Method:       http.MethodGet,
 		Handler:      controllers.GetUnassignedCase,

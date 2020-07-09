@@ -28,14 +28,17 @@ class NestedModal extends Component {
   firstTimeChange = time => {
     console.log(time)
     this.setState({FirstTime: time})
+    window.alert("First Time is: "+ this.state.FirstTime)
   }
   secondTimeChange = time => {
     console.log(time)
     this.setState({SecondTime: time})
+    window.alert("second Time is: ", this.state.SecondTime)
   }
   thirdTimeChange = time => {
-    console.log(time)
+    console.log(time.Locale())
     this.setState({ThirdTime: time})
+    window.alert("Third time is: "+time)
   }
 
   state = { open: false };
@@ -47,7 +50,7 @@ class NestedModal extends Component {
     const { SelectedDay, FirstTime, SecondTime, ThirdTime } = this.state;
     axios
         .post(
-            endpoint + "/lawyerdashboard/api/schedulemeeting",
+            endpoint + "/lawyerdashboard/api/lawyersendtimemeeting",
             {
               SelectedDay: SelectedDay,
               FirstTime: FirstTime,
@@ -73,6 +76,7 @@ class NestedModal extends Component {
     }
     this.setState({ selectedDay: day });
     console.log(this.state)
+    window.alert("The Date is: "+ this.state.selectedDay)
   }
 
  

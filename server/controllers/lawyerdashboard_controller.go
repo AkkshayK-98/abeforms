@@ -53,7 +53,7 @@ func CreateMeeting(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Methods", "POST")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
-	var meetingInfo models.Lawyers
+	var lawyerInfo models.Lawyers
 	if err := json.NewDecoder(r.Body).Decode(&lawyerInfo); err != nil {
 		apiErr := &utils.ApplicationError{
 			Message:    "decoding lawyer info failed",
@@ -119,5 +119,38 @@ func TakeCase(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	log.Printf("Case Taken by %v", user.EmailAddress)
+
+}
+
+func LawyerSendTimeMeeting(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Context-Type", "application/x-www-form-urlencoded")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "POST")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+
+	var meetingTimes utils.LawyerSendTime
+	if err := json.NewDecoder(r.Body).Decode(&meetingTimes); err != nil {
+		apiErr := &utils.ApplicationError{
+			Message:    "decoding lawyer meeting time choices info failed",
+			StatusCode: http.StatusInternalServerError,
+			Code:       "server_error",
+		}
+		jsonValue, err := json.Marshal(apiErr)
+		if err != nil {
+			log.Println(err)
+		}
+		w.WriteHeader(apiErr.StatusCode)
+		w.Write(jsonValue)
+		log.Println("Something came up wrong while decoding lawyer meeting times choices info")
+		return
+	}
+
+	apiErr := services.LawyerSendTimeMeeting(meetingTimes)
+	if apiErr != nil {
+		jsonValue, _ := json.Marshal(apiErr)
+		w.WriteHeader(apiErr.StatusCode)
+		w.Write([]byte(jsonValue))
+		return
+	}
 
 }

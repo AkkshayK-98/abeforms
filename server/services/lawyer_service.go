@@ -30,3 +30,7 @@ func TakeCase(caseID string, user models.Lawyers) *utils.ApplicationError {
 func CreateMeeting(zoomInfo utils.ZoomMeeting, user models.Lawyers) *utils.ApplicationError {
 	return domain.CreateMeeting(zoomInfo, user)
 }
+
+func LawyerSendTimeMeeting(meetingTimes utils.LawyerSendTime) *utils.ApplicationError {
+	return domain.LawyerSendTimeMeeting(meetingTimes)
+}

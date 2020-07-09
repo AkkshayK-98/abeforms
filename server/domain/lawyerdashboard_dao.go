@@ -132,3 +132,10 @@ func CreateMeeting(zoomInfo utils.ZoomMeeting, user models.Lawyers) *utils.Appli
 
 	return nil
 }
+
+func LawyerSendTimeMeeting(meetingTimes utils.LawyerSendTime) *utils.ApplicationError {
+	log.Println("firstSelectedmeetingTimes: ", meetingTimes.FirstSelectedTime)
+	log.Println("secondSelectedmeetingTimes: ", meetingTimes.SecondSelectedTime)
+	log.Println("thirdSelectedmeetingTimes: ", meetingTimes.ThirdSelectedTime)
+	return nil
+}
